@@ -22,63 +22,80 @@ public class CandidateManager {
         String id = getData.getString("ID: ", "^.*$", "");
 
         //Check id have existed or not
-        {
+        boolean isExist = false;
+        for (Candidate candidate : data) {
+            if (candidate.getId().equals(id)) {
+                isExist = true;
+            }
         }
+        if (!isExist) {
 
-        String firstName = getData.getString("First name: ", "^[a-zA-Z\\s]+$", "Name must contain only letter");
-        String lastName = getData.getString("Last name: ", "^[a-zA-Z\\s]+$", "Name must contain only letter");
-        Date dob = getData.getDate("DOB: ");
-        String address = getData.getString("Address: ", "^[a-zA-Z\\s]+$", "Address must contain only letter");
-        String phone = getData.getString("Phone: ", "^\\d{10,11}$", "Phone must be 10 or 11 numbers");
-        String email = getData.getEmail("Email: ");
+            String firstName = getData.getString("First name: ", "^[a-zA-Z\\s]+$", "Name must contain only letter");
+            String lastName = getData.getString("Last name: ", "^[a-zA-Z\\s]+$", "Name must contain only letter");
+            Date dob = getData.getDate("DOB: ");
+            String address = getData.getString("Address: ", "^[a-zA-Z\\s]+$", "Address must contain only letter");
+            String phone = getData.getString("Phone: ", "^\\d{10,11}$", "Phone must be 10 or 11 numbers");
+            String email = getData.getEmail("Email: ");
 
-        return new Candidate(id, firstName, lastName, dob, address, phone, email, 0);
+            return new Candidate(id, firstName, lastName, dob, address, phone, email, 0);
+        } else {
+            System.out.println("This id have already exist");
+            return null;
+        }
     }
 
     void createExperience() {
         Candidate candidate = createCandidate();
-        candidate.setCandidateType(0);
 
-        int expInYear = getData.getInt("Year of experience: ", 0, 100);
-        String proSkill = getData.getString("Professional skill: ", "^[a-zA-Z\\s]+$", "Skill must contain only letter");
+        if (candidate != null) {
+            candidate.setCandidateType(0);
 
-        data.add(new Experience(expInYear, proSkill, candidate.getId(), candidate.getFirstName(),
-                candidate.getLastName(), candidate.getDOB(), candidate.getAddress(),
-                candidate.getPhone(), candidate.getEmail(), candidate.getCandidateType()));
+            int expInYear = getData.getInt("Year of experience: ", 0, 100);
+            String proSkill = getData.getString("Professional skill: ", "^[a-zA-Z\\s]+$", "Skill must contain only letter");
 
-        System.out.println("Create experience successfull!");
+            data.add(new Experience(expInYear, proSkill, candidate.getId(), candidate.getFirstName(),
+                    candidate.getLastName(), candidate.getDOB(), candidate.getAddress(),
+                    candidate.getPhone(), candidate.getEmail(), candidate.getCandidateType()));
+
+            System.out.println("Create experience successfull!");
+        }
     }
 
     void createFresher() {
         Candidate candidate = createCandidate();
-        candidate.setCandidateType(1);
 
-        Date graduationDate = getData.getDate("Graduation date: ");
-        String graduationRank = getData.getString("Graduation rank: ", "^[a-zA-Z\\s]+$", "Rank must contain only letter");
-        String graduationUniversity = getData.getString("Graduation university: ", "^[a-zA-Z\\s]+$", "University must contain only letter");
+        if (candidate != null) {
+            candidate.setCandidateType(1);
+            Date graduationDate = getData.getDate("Graduation date: ");
+            String graduationRank = getData.getString("Graduation rank: ", "^[a-zA-Z\\s]+$", "Rank must contain only letter");
+            String graduationUniversity = getData.getString("Graduation university: ", "^[a-zA-Z\\s]+$", "University must contain only letter");
 
-        data.add(new Fresher(graduationDate, graduationRank, graduationUniversity,
-                candidate.getId(), candidate.getFirstName(), candidate.getLastName(),
-                candidate.getDOB(), candidate.getAddress(), candidate.getPhone(),
-                candidate.getEmail(), candidate.getCandidateType()));
+            data.add(new Fresher(graduationDate, graduationRank, graduationUniversity,
+                    candidate.getId(), candidate.getFirstName(), candidate.getLastName(),
+                    candidate.getDOB(), candidate.getAddress(), candidate.getPhone(),
+                    candidate.getEmail(), candidate.getCandidateType()));
 
-        System.out.println("Create fresher successfull!");
+            System.out.println("Create fresher successfull!");
+        }
     }
 
     void createIntern() {
         Candidate candidate = createCandidate();
-        candidate.setCandidateType(2);
 
-        String major = getData.getString("Major: ", "^[a-zA-Z\\s]+$", "Major must contain only letter");
-        String semester = getData.getString("Semester: ", "^[a-zA-Z\\s]+$", "Semester must contain only letter");
-        String university = getData.getString("University: ", "^[a-zA-Z\\s]+$", "University must contain only letter");
+        if (candidate != null) {
+            candidate.setCandidateType(2);
 
-        data.add(new Intern(major, semester, university, candidate.getId(),
-                candidate.getFirstName(), candidate.getLastName(), candidate.getDOB(),
-                candidate.getAddress(), candidate.getPhone(), candidate.getEmail(),
-                candidate.getCandidateType()));
+            String major = getData.getString("Major: ", "^[a-zA-Z\\s]+$", "Major must contain only letter");
+            String semester = getData.getString("Semester: ", "^[a-zA-Z\\s]+$", "Semester must contain only letter");
+            String university = getData.getString("University: ", "^[a-zA-Z\\s]+$", "University must contain only letter");
 
-        System.out.println("Create fresher successfull!");
+            data.add(new Intern(major, semester, university, candidate.getId(),
+                    candidate.getFirstName(), candidate.getLastName(), candidate.getDOB(),
+                    candidate.getAddress(), candidate.getPhone(), candidate.getEmail(),
+                    candidate.getCandidateType()));
+
+            System.out.println("Create fresher successfull!");
+        }
     }
 
     void search() {
