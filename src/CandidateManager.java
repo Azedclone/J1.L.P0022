@@ -67,7 +67,7 @@ public class CandidateManager {
         if (candidate != null) {
             candidate.setCandidateType(1);
             Date graduationDate = getData.getDate("Graduation date: ");
-            String graduationRank = getData.getString("Graduation rank: ", "^[a-zA-Z\\s]+$", "Rank must contain only letter");
+            String graduationRank = getData.getRank("Graduation rank: ");
             String graduationUniversity = getData.getString("Graduation university: ", "^[a-zA-Z\\s]+$", "University must contain only letter");
 
             data.add(new Fresher(graduationDate, graduationRank, graduationUniversity,

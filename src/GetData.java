@@ -68,7 +68,7 @@ public class GetData {
 
             if (input.isEmpty()) {
                 System.out.println("Input could not be empty!");
-            } else if (input.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            } else if (input.matches("^[\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$")) {
                 return input;
             } else {
                 System.out.println("Email is not valid");
@@ -98,6 +98,25 @@ public class GetData {
                     }
                 } catch (ParseException e) {
                     System.out.println("Date is not valid!");
+                }
+            }
+        }
+    }
+
+    String getRank(String msg) {
+        String input;
+
+        while (true) {
+            System.out.print(msg);
+            input = sc.nextLine();
+
+            if (input.isEmpty()) {
+                System.out.println("Input could not be empty");
+            } else {
+                if (!(input.matches("Excellence") || input.matches("Good") || input.matches("Fair") || input.matches("Poor"))) {
+                    System.out.println("Rank must be one of four type: Excellence, Good, Fair, Poor");
+                } else {
+                    return input;
                 }
             }
         }
