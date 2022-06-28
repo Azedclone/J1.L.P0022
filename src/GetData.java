@@ -94,10 +94,41 @@ public class GetData {
                     if (date.before(new Date())) {
                         return date;
                     } else {
-                        System.out.println("Date must before this year!");
+                        System.out.println("Date must before today!");
                     }
                 } catch (ParseException e) {
                     System.out.println("Date is not valid!");
+                }
+            }
+        }
+    }
+
+    Date getBirth(String msg) {
+        String input;
+        Date date;
+
+        while (true) {
+            System.out.print(msg);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+            dateFormat.setLenient(false);
+            input = sc.nextLine();
+
+            if (input.isEmpty()) {
+                System.out.println("Input could not be empty");
+            } else {
+                if (input.length() == 4) {
+                    try {
+                        date = dateFormat.parse(input);
+                        if (date.before(new Date())) {
+                            return date;
+                        } else {
+                            System.out.println("Date must before today!");
+                        }
+                    } catch (ParseException e) {
+                        System.out.println("Date is not valid!");
+                    }
+                } else {
+                    System.out.println("Date must in format yyyy");
                 }
             }
         }

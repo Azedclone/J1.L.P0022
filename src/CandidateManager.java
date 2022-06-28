@@ -32,7 +32,7 @@ public class CandidateManager {
 
             String firstName = getData.getString("First name: ", "^[a-zA-Z\\s]+$", "Name must contain only letter");
             String lastName = getData.getString("Last name: ", "^[a-zA-Z\\s]+$", "Name must contain only letter");
-            Date dob = getData.getDate("DOB: ");
+            Date dob = getData.getBirth("DOB: ");
             String address = getData.getString("Address: ", "^[a-zA-Z\\s]+$", "Address must contain only letter");
             String phone = getData.getString("Phone: ", "^\\d{10,11}$", "Phone must be 10 or 11 numbers");
             String email = getData.getEmail("Email: ");
